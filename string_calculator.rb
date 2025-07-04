@@ -16,6 +16,14 @@ class StringCalculator
     
     # Replace newlines with commas, then split on commas
     numbers = numbers.gsub("\n", ",")
-    numbers.split(',').map(&:to_i).sum
+    number_array = numbers.split(',').map(&:to_i)
+    
+    # Check for negative numbers
+    negative_numbers = number_array.select { |num| num < 0 }
+    if negative_numbers.any?
+      raise "negative numbers not allowed #{negative_numbers.join(',')}"
+    end
+    
+    number_array.sum
   end
 end 
